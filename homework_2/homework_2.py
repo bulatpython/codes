@@ -1,14 +1,18 @@
 
+from collections import deque, defaultdict
 
-# Введите свое решение ниже
-from collections import defaultdict
-from collections import OrderedDict
-cafes = dict()
-cafes = defaultdict(list)
-ratings = [('Old York', 3.3), ('New Age', 4.6), ('Old Gold', 3.3), ('General Foods', 4.8),
-           ('Belissimo', 4.5), ('CakeAndCoffee', 4.2), ('CakeOClock', 4.2), ('CakeTime', 4.1),
-           ('WokToWork', 4.9), ('WokAndRice', 4.9), ('Old Wine Cellar', 3.3), ('Nice Cakes', 3.9)]
-ratings.sort(key=lambda x: (-x[1], x[0]))
-for cafe, rating in ratings:
-    cafes[cafe].append(rating)
-print(cafes)
+def task_manager(tasks):
+    servers = defaultdict(deque)
+    for task in tasks:
+        if task[-1]:
+            servers[task[1]].appendleft(task[0])
+        else:
+            servers[task[1]].append(task[0])
+    return servers
+tasks = [(36871, 'office', False),
+(40690, 'office', False),
+(35364, 'voltage', False),
+(41667, 'voltage', True),
+(33850, 'office', False)]
+ 
+print(task_manager(tasks))
